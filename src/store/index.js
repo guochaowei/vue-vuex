@@ -21,8 +21,23 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    increment (state) {
-      state.count++
+    increment (state, paylod) {
+      state.count += paylod.amount
+    }
+  },
+  actions: {
+    step1 ({ commit }, obj) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          commit('increment', obj)
+          resolve()
+        }, 1000)
+      })
+    },
+    step2 ({ commit }, obj) {
+      setTimeout(() => {
+        commit('increment', {amount: 29})
+      }, 5000)
     }
   }
 })
